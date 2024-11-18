@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-6=6z03nsncx=*c6v4*t)7-3^13n0805!v4r1zi&&19g*muwmig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['94.21.168.28', '192.168.100.0/24', '*']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -146,3 +146,22 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'darido.shop@gmail.com'
 EMAIL_HOST_PASSWORD = 'jpzr sgoa vhvt rjqy'
 DEFAULT_FROM_EMAIL = 'darido.shop@gmail.com'
+
+################## Biztonsági beállítások ###################
+# Biztosítsuk, hogy a Django webalkalmazás mindig HTTPS-t használjon:
+SECURE_SSL_REDIRECT = True
+
+# Engedélyezzük az HTTP Strict Transport Security-t (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # 1 évig tart
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Az aldomain-ekre is érvényes
+SECURE_HSTS_PRELOAD = True  # Előre bejegyezhetjük a domaint a böngészőkben
+
+# Az X-Content-Type-Options fejléc beállítása, hogy megakadályozzuk a MIME típusok változtatását
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Az X-Frame-Options beállítása: megakadályozza a clickjacking támadásokat
+X_FRAME_OPTIONS = 'DENY'
+
+# Az SSL cookie-k biztonságos használata
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
