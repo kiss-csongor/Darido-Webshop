@@ -1,0 +1,341 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<body class="test">
+
+    {% for message in messages %}
+    <div class="popup" id="popup">
+        <img src="{% static 'images/tick.png' %}" />
+        <h2></h2>
+        <div class="message {{ message.tags }}">{{message}}</div>
+        <br>
+        <button id="popupClose">OK</button>
+    </div>
+    {% endfor %}
+    <div id="loginContent">
+        <!--
+        <h1 class="text-center mt-5 mb-4">Dárídó webshop</h1>
+        <div class="carouseltartó">
+            <div class="carousel">
+                <input type="radio" name="slides" checked="checked" id="slide-1">
+                <input type="radio" name="slides" id="slide-2">
+                <input type="radio" name="slides" id="slide-3">
+                <input type="radio" name="slides" id="slide-4">
+                <input type="radio" name="slides" id="slide-5">
+                <input type="radio" name="slides" id="slide-6">
+                <ul class="carousel__slides">
+                    <li class="carousel__slide">
+                        <figure>
+                            <div>
+                                <img src="static\images\carousel1.jpeg" alt="">
+                            </div>
+                            <figcaption>
+                                Üdvözlünk a Dáridó Webshopon
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div>
+                                <img src="static\images\carousel2.jpeg" alt="">
+                            </div>
+                            <figcaption>
+
+                                <span class="credit">Előadó(k):</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div>
+                                <img src="static\images\carousel3.webp" alt="">
+                            </div>
+                            <figcaption>
+                                A raktáros csapatunk
+                                <span class="credit">Előadó(k):</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div>
+                                <img src="static\images\carousel4.avif" alt="">
+                            </div>
+                            <figcaption>
+                                A szállítási ügyintézők
+                                <span class="credit">Előadó(k):</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div>
+                                <img src="static\images\carousel5.jpg" alt="">
+                            </div>
+                            <figcaption>
+                                Lagzi Lajcsi 17 éves korában az eslő áramkörével
+                                <span class="credit">Előadó(k):</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div>
+                                <img src="static\images\carousel6.jpeg" alt="">
+                            </div>
+                            <figcaption>
+                                Futáraink a legmodernebb szállítóeszközökkel hordják a megrendeléseket
+                                <span class="credit">Előadó(k):</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                </ul>
+                <ul class="carousel__thumbnails">
+                    <li>
+                        <label for="slide-1"><img src="static\images\carousel1.jpeg" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-2"><img src="static\images\carousel2.jpeg" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-3"><img src="static\images\carousel3.webp" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-4"><img src="static\images\carousel4.avif" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-5"><img src="static\images\carousel5.jpg" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-6"><img src="static\images\carousel6.jpeg" alt=""></label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        -->
+        <div class="container-fluid">
+            <div id="Lapozo" class="carousel slide " data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#Lapozo" data-slide-to="0" class="active"></li>
+                    <li data-target="#Lapozo" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner Lapozo">
+                    <div class="carousel-item active Lapozo">
+                        <img src="static\images\carousel1.jpeg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item Lapozo">
+                        <img src="static\images\carousel2.jpeg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#Lapozo" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#Lapozo" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+
+        <!-- Mit árulunk -->
+        <h1 class="text-center mt-5 mb-4">Mit tudsz nálunk vásárolni?</h1>
+        <div class="row masodikresz">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <img src="static\images\Bunyós Pityu x Mike Tyson - poló (3990 Ft).jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <p class="polo fs-5 homep">Személyre szabott stílus és kényelem találkozik a mulatós zene iránti rajongással a pólók és pulóverek kategóriájában. Válogass egyedi design-ok között, melyek kifejezik a mulatós zene szeretetét és tiszteletét. Legyen szó akár Zámbó Jimmy, Delhusa Gjon vagy más ikonikus előadók emblémáiról, ezek a ruhadarabok nem csupán divatos megjelenést biztosítanak, hanem lehetővé teszik számodra, hogy büszkén mutasd meg hová tartozol és milyen zenéket kedvelsz. Kényelmes viseletükkel és minőségi anyagaikkal garantáltan kedvenceddé válnak mindennapi viseletedben, és emlékeztetni fognak arra, hogy a mulatós zene mindig veled van.</p>
+            </div>
+        </div>
+        <div class="row masodikresz">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <p class="lemezek fs-5 homep">Keress mélyreható és érzelmekkel teli zenés élményeket a CD-k és DVD-k széles választékában. Fedezd fel újra az ikonikus mulatós dalokat, vagy gyűjtsd össze a kedvenc előadóid legújabb és leghíresebb albumait. Legyen szó akár Zámbó Jimmy, Delhusa Gjon, Pataky Attila vagy más nagy névről, az általunk kínált CD-k és DVD-k lehetővé teszik számodra, hogy elmerülj a mulatós zene világában bármikor, bárhol. Élvezd az élet zenéjét, és színesítsd az otthoni szórakozást ezekkel a kiváló minőségű hanghordozókkal, melyek méltóak a mulatós zene hagyományaira és hírnevére.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <img src="static\images\Zámbó Jimmy - Karácsony Jimmyvel (CD, 3990 Ft).jpg" class="img-fluid lemezkep" alt="">
+            </div>
+        </div>
+
+        <!-- A Cég -->
+        <h1 class="text-center mt-5 mb-4">A Cég</h1>
+        <div class="row masodikresz">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <img src="static\images\logo.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h2>Üdvözlöm a Mulatós Zene Világában!</h2><br>
+                <p class="polo fs-5 homep">Szeretnénk bemutatni Önnek cégünket, amely a mulatós zene szerelmeseinek kínál minőségi termékeket. Küldetésünk, hogy az igazi mulatós zenét kedvelők számára valódi élményt nyújtsunk, és lehetőséget adjunk nekik arra, hogy kedvenc művészeiket és dalokat viselhessék, illetve gyűjthessék.
+
+                    Webáruházunkban széles választékban találhatóak különböző CD-k, pólók, bögrék és ajándéktárgyak, amelyek mindegyike a mulatós zene legnagyobb alakjainak ihletett. Zámbó Jimmy-től a Lagzi Lajcsiig, Pataki Attilától a Kacor Feriig, valamint Bunyós Pityuig, nálunk mindent megtalál, amire a mulatós zene világában vágyik.
+
+                    Célunk, hogy ügyfeleink számára egyedülálló élményt nyújtsunk, és segítsük őket abban, hogy gyűjteményüket bővítsék és színesítsék a legjobb minőségű mulatós zenei termékekkel. Legyen részese Ön is ennek a különleges világnak, és fedezze fel webáruházunk kiváló kínálatát!</p>
+            </div>
+        </div>
+        <div class="row masodikresz">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h2>Fedezze fel a Mulatós Zenei Termékek Gazdag Világát!</h2><br>
+                <p class="lemezek fs-5 homep">Ha a mulatós zene világában otthon érzi magát, akkor webáruházunkban garantáltan megtalálja, amit keres. Számos különböző termék várja Önt, hogy kifejezhesse szeretetét és lelkesedését kedvenc mulatós zenészek és dalok iránt.
+
+                    A CD-k, pólók, bögrék és ajándéktárgyak mindegyike a mulatós zene nagyjainak inspirációját tükrözi. Legyen szó egy különleges emlékről egy felejthetetlen koncertről, vagy egy kedves ajándékról egy barátnak vagy családtagjának, nálunk mindenki megtalálja a számára tökéletes mulatós zenei terméket.
+
+                    Böngésszen webáruházunkban, és fedezze fel a mulatós zenei termékek gazdag világát! Legyen részese ennek az élénk és vidám közösségnek, és tegye még emlékezetesebbé mulatós zenei élményeit a mi kiváló minőségű termékeinkkel!</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <img src="static\images\Zámbó Jimmy - Karácsony Jimmyvel (CD, 3990 Ft).jpg" class="img-fluid lemezkep" alt="">
+            </div>
+        </div>
+
+        <!-- Csapat tagjai -->
+        <h1 class="text-center mt-5 mb-4">A csapat tagjai</h1>
+        <div class="tartó">
+            <div class="product">
+                <div class="product-card">
+                    <h2 class="name">Technikai menedzser</h2>
+                    <a class="popup-btn" onclick="hideSidebar()">Kiss Csongor</a>
+                    <img src="static\images\kcsongor.jpg" class="product-img" alt="adam">
+                </div>
+                <div class="popup-view">
+                    <div class="popup-card">
+                        <a onclick="unhideSidebar()"><i class="fas fa-times close-btn"></i></a>
+                        <div class="product-img">
+                            <img src="static\images\kcsongor.jpg" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Kiss Csongor<br><span>Dáridó Kft</span></h2>
+                            <p>Kiss Csongor vagyok, a cég technikus menedzsere. Tapasztalatom és szakértelmem a technikai területeken segíteni fog abban, hogy hatékonyan vezéreljem a technikai csapatot és biztosítsam a projektek sikeres végrehajtását. Az elmúlt évek során számos különböző technológiai kihívással találkoztam, és mindig lelkesen és hatékonyan oldottam meg azokat. Az erős vezetői képességeimnek és a technikai szaktudásomnak köszönhetően biztos vagyok benne, hogy képes leszek irányítani és inspirálni a csapatot.</p>
+                            <p><span class="elerhetoseg">Email: kiss.csongor@students.jedlik.eu</span><br>
+                                <span class="elerhetoseg">Telefonszám: +36 70 211 4952</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-card">
+                    <h2 class="name">Média menedzser</h2>
+                    <a class="popup-btn" onclick="hideSidebar()">Smauzer Dávid</a>
+                    <img src="static\images\smauzer.jpg" class="product-img" alt="adam">
+                </div>
+                <div class="popup-view">
+                    <div class="popup-card">
+                        <a onclick="unhideSidebar()"><i class="fas fa-times close-btn"></i></a>
+                        <div class="product-img">
+                            <img src="static\images\smauzer.jpg" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Smauzer Dávid<br><span>Dáridó Kft</span></h2>
+                            <p>Smauzer Dávid vagyok, a cég média menedzsere. Tapasztalatom és szenvedélyem a médiaipar iránt segíteni fog abban, hogy hatékonyan koordináljam a médiastratégia kidolgozását és végrehajtását. Az elmúlt évek során számos különböző média projekten dolgoztam, és büszke vagyok arra, hogy sikeresen hozzájárultam a kampányok sikeréhez. Az erős kommunikációs képességeimnek és a kreativitásomnak köszönhetően bízom benne, hogy új lendületet és ötleteket hozhatok a csapatba.</p>
+                            <p><span class="elerhetoseg">Email: smauzer.david@students.jedlik.eu</span><br>
+                                <span class="elerhetoseg">Telefonszám: +36 </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-card">
+                    <h2 class="name">Technikus</h2>
+                    <a class="popup-btn" onclick="hideSidebar()">Csete Ádám</a>
+                    <img src="static\images\adam.jpg" class="product-img" alt="adam">
+                </div>
+                <div class="popup-view">
+                    <div class="popup-card">
+                        <a onclick="unhideSidebar()"><i class="fas fa-times close-btn"></i></a>
+                        <div class="product-img">
+                            <img src="static\images\adam.jpg" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Csete Ádám<br><span>Dáridó Kft</span></h2>
+                            <p>Csete Ádám vagyok, a cég technikusa. Tapasztalatom és elkötelezettségem a technikai területeken segíteni fog abban, hogy hatékonyan támogassam a cég működését és fejlődését. Az elmúlt évek során számos különböző technikai problémával találkoztam, és mindig lelkesen és hatékonyan oldottam meg azokat. Az erős problémamegoldó képességeimnek és a technikai szaktudásomnak köszönhetően biztos vagyok benne, hogy hozzá tudok járulni a csapat és a cég sikeréhez.</p>
+                            <p><span class="elerhetoseg">Email: csete.adam@students.jedlik.eu</span><br>
+                                <span class="elerhetoseg">Telefonszám: +36 30 223 0028 </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-card">
+                    <h2 class="name">Technikai dokumentáló</h2>
+                    <a class="popup-btn" onclick="hideSidebar()">Baán Gyula</a>
+                    <img src="static\images\gyula.jpg" class="product-img" alt="adam">
+                </div>
+                <div class="popup-view">
+                    <div class="popup-card">
+                        <a onclick="unhideSidebar()"><i class="fas fa-times close-btn"></i></a>
+                        <div class="product-img">
+                            <img src="static\images\gyula.jpg" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Baán Gyula<br><span>Dáridó Kft</span></h2>
+                            <p>Baán Gyula vagyok, és nagy lelkesedéssel csatlakoztam a csapathoz mint technikai dokumentáló. Tapasztalatom és hitelességem alapján rendkívül elkötelezett vagyok az informatikai folyamatok és termékek dokumentálása iránt. A precizitás és a strukturált gondolkodás segít abban, hogy átlátható és könnyen érthető dokumentumokat állítsak össze, amelyek hozzájárulnak a projektek hatékony végrehajtásához és a termékek minőségéhez. </p>
+                            <p><span class="elerhetoseg">Email: baan.gyula@students.jedlik.eu</span><br>
+                                <span class="elerhetoseg">Telefonszám: +36 </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-card">
+                    <h2 class="name">Projektmenedzser</h2>
+                    <a class="popup-btn" onclick="hideSidebar()">Szövérfi Csongor</a>
+
+                    <img src="static\images\szcsongor.jpg" class="product-img" alt="adam">
+                </div>
+                <div class="popup-view">
+                    <div class="popup-card">
+                        <a onclick="unhideSidebar()"><i class="fas fa-times close-btn"></i></a>
+                        <div class="product-img">
+                            <img src="static\images\szcsongor.jpg" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>Szövérfi Csongor<br><span>Dáridó Kft</span></h2>
+                            <p>Szövérfi Csongor vagyok, és nagy örömmel csatlakoztam a csapathoz, mint a projektmenedzser. Tapasztalatom és szenvedélyem a projektmenedzsment iránt segít abban, hogy hatékonyan vezéreljem a projekteket, és biztosítsam a sikeres kimenetelt. Az elmúlt évek során számos komplex projektben vettem részt, és büszke vagyok arra, hogy mindig határidőre és költségvetésen belül sikerült teljesítenünk. A kommunikációm erős és meggyőző, ami segít a csapat összekovácsolásában és a céljaink elérésében.</p>
+                            <p><span class="elerhetoseg">Email: szoverfi.csongor@students.jedlik.eu</span><br>
+                                <span class="elerhetoseg">Telefonszám: +36 </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% if messages %}
+<script>loginContent
+    popup = document.getElementById('popup');
+    content = document.getElementById('loginContent')
+
+    content.style.opacity = '0.1'
+    popup.style.display = 'block';
+
+    setTimeout(loginAnimation, 4000);
+
+    function loginAnimation() {
+        document.getElementById('popup').style.animation = "closePopupAnimation 0.5s ease-in-out";
+        document.getElementById('loginContent').style.animation = "opacityAnimation 0.5s ease.out";
+
+        setTimeout(function () {
+            document.getElementById('popup').style.animation = "";
+            document.getElementById('loginContent').style.animation = "";
+            document.getElementById('popup').style.display = "none";
+            document.getElementById('loginContent').style.opacity = 1;
+        }, 500);
+    }
+
+    var popupClose = document.getElementById('popupClose')
+    popupClose.addEventListener("click", function () {
+        loginAnimation()
+    });
+
+</script>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,192 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div id="formContent">
+  <form method="GET" action=".">
+    {% csrf_token %}
+
+    <div style="margin: auto;" class="form-group col-lg-4 col-md-4 col-sm-4 balance">
+      <div class="input-group" style="padding-top: 32px;">
+        <input style="border-radius: 20px; margin-left: 10px;" class="form-control py-2 search-box" type="search" placeholder="Kulcsszó" name="product_name" id="pname">
+      </div>
+      <p style="text-align: center;"><a id="moreFilter" href="#" class="nav-link">Részletes szűrés</a></p>
+    </div>
+
+    <div id="toggleFilter" class="hidden">
+      <div style="margin-top: 20px;" class="form-row">
+        <div class="form-group col-lg-6 col-md-12 col-sm-12 balance">
+          <label>Előadó</label>
+          <select id="inputCategory" class="form-control" name="brand">
+            <option></option>
+            {% for bran in brands %}
+            <option value="{{ bran }}">{{ bran }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-lg-6 col-md-12 col-sm-12 balance">
+          <label>Kategória</label>
+          <select id="inputBrand" class="form-control" name="category">
+            <option></option>
+            {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 10px;" class="form-row">
+        <div class="form-group col-lg-3 col-md-6 col-sm-12 balance">
+          <label>Értékelés (min)</label>
+          <input type="number" min="0" max="4.9" step="0.1" class="form-control" id="ratingMin" name="rating_min">
+        </div>
+        <div class="form-group col-lg-3 col-md-6 col-sm-12 balance">
+          <label>Értékelés (max)</label>
+          <input type="number" min="0" max="5" step="0.1" class="form-control" id="ratingMax" name="rating_max">
+        </div>
+        <div class="form-group col-lg-3 col-md-6 col-sm-12 balance">
+          <label>Ár (min)</label>
+          <input type="number" min="0" step="1" class="form-control" id="priceMin" name="price_min">
+        </div>
+        <div class="form-group col-lg-3 col-md-6 col-sm-12 balance">
+          <label>Ár (max)</label>
+          <input type="number" min="0" step="1" class="form-control" id="priceMax" name="price_max">
+        </div>
+
+      </div>
+
+      <div class="checkbox-wrapper-55" style="margin-bottom: 20px;">
+        <label class="rocker rocker-small" style="display: block; margin: auto;">
+          <input type="checkbox" id="digital" name="digital" value="false" onclick="toggleCheckbox()">
+          <span class="switch-left">Igen</span>
+          <span class="switch-right">Nem</span>
+        </label>
+        <p style="text-align: center; margin-top: 5px;" class="digi">Digitális termék</p>
+      </div>
+
+
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <button style="background-color: skyblue; width: 200px; margin: auto; display: block; font-weight: bold;" class="button-33 add-to-cart" role="button">Keresés</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <button id="resetFilter" style="background-color: rgb(255, 119, 0); width: 200px; margin: auto; display: block; font-weight: bold;" class="button-33 add-to-cart" role="">Szűrő alapértelmezése</button>
+      </div>
+    </div>
+
+  </form>
+
+
+
+  <div class="row" style="margin-top: 100px;" id="lightStore">
+    {% for product in products %}
+    {% if product.darkweb == False %}
+    <div class="col-lg-4 col-md-6 col-sm-12 balance">
+      <img class="thumbnail" src="{{ product.imageURL }}" />
+      <div class="box-element product">
+        <h5 style="height: 52px;"><strong>{{ product.pname }}</strong></h5>
+        <h6 style="font-size: smaller;"><strong>{{ product.brand.name }}&nbsp;|&nbsp;
+            {% for category in product.category.all %}
+            {{ category }}
+            {% endfor %}
+            &nbsp;|&nbsp;
+          </strong></h6>
+        <hr>
+        <h6 style="font-size: small; height: 30px;">{{ product.description }}</h6>
+        <hr>
+        <h4><strong>{{ product.price|floatformat:0|intcomma }} Ft</strong><i class='bx bx-star rating-star'></i><span class="rating">{{ product.rating }}</span><br>
+          {% if product.stock > 0 %}
+          <span style="color: black;" class="stock">Raktáron: {{ product.stock }} db</span>
+          {% else %}
+          <span style="color: red;" class="stock">Nincs raktáron</span>
+          {% endif %}
+        </h4><br>
+        {% if product.stock > 0 %}
+        <button data-product="{{ product.id }}" data-action="add" class="button-33 add-to-cart update-cart" role="button">Kosárba</button>
+        {% endif %}
+        <a href="{% url 'product' pk=product.pk %}">
+          <button class="button-33 view" role="button">Megtekint</button>
+        </a>
+      </div>
+    </div>
+    <div id="light" class="popup-view">
+      <div class="lightcardstore popup-card">
+        <a onclick="lightcloseQuickView()"><i class="fas fa-times lightclose-btn"></i></a>
+        <div class="lightcardstore-img">
+          <img id="lightquick-view-image" src="" alt="">
+        </div>
+        <div class="lightinfók">
+          <h2 id="lightquick-view-name"></h2>
+          <p id="lightquick-view-details"></p>
+          {% if product.stock > 0 %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="row hidden" style="margin-top: 100px;" id="darkStore">
+    {% for product in products %}
+    {% if product.darkweb == True %}
+    <div style="margin-bottom: 50px;" class="col-lg-4 col-md-6 col-sm-12 balance">
+      <img class="thumbnail" src="{{ product.imageURL }}" />
+      <div class="box-element product">
+        <h5 style="height: 52px;"><strong>{{ product.pname }}</strong></h5>
+        <h6 style="font-size: smaller;"><strong>{{ product.brand.name }}&nbsp;|&nbsp;
+            {% for category in product.category.all %}
+            {{ category }}
+            {% endfor %}
+            &nbsp;|&nbsp;
+          </strong></h6>
+        <hr>
+        <h6 style="font-size: small; height: 30px;">{{ product.description }}</h6>
+        <hr>
+        <h4><strong>{{ product.price|floatformat:0|intcomma }} Ft</strong><i class='bx bx-star rating-star'></i><span class="rating">{{ product.rating }}</span><br>
+          {% if product.stock > 0 %}
+          <span style="color: black;" class="stock">Raktáron: {{ product.stock }} db</span>
+          {% else %}
+          <span style="color: red;" class="stock">Nincs raktáron</span>
+          {% endif %}
+        </h4><br>
+        {% if product.stock > 0 %}
+        <button data-product="{{ product.id }}" data-action="add" class="button-33 add-to-cart update-cart" role="button">Kosárba</button>
+        {% endif %}
+        <a href="{% url 'product' pk=product.pk %}">
+          <button class="button-33 view" role="button">Megtekint</button>
+        </a>
+      </div>
+    </div>
+    <div id="dark" class="popup-view">
+      <div class="darkcardstore popup-card">
+        <a onclick="darkcloseQuickView()"><i class="fas fa-times darkclose-btn"></i></a>
+        <div class="darkcardstore-img">
+          <img id="darkquick-view-image" src="" alt="">
+        </div>
+        <div class="darkinfók">
+          <h2 id="darkquick-view-name"></h2>
+          <p id="darkquick-view-details"></p>
+          {% if product.stock > 0 %}
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="popup" id="popup">
+  <img src="{% static 'images/tick.png' %}" />
+  <h2>Köszönjük</h2>
+  <p>Sikeresen hozzáadtad a terméket a kosárhoz</p>
+  <button id="popupClose">OK</button>
+</div>
+
+<script src="{% static 'js/filter.js' %}"></script>
+{% endblock content %}

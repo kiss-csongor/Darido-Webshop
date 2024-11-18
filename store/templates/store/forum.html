@@ -1,0 +1,305 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<form method="GET" action=".">
+  {% csrf_token %}
+
+  <div style="margin: auto;" class="form-group col-lg-4 col-md-4 col-sm-4 balance">
+    <div class="input-group" style="padding-top: 32px;">
+      <input style="border-radius: 20px;" class="form-control py-2 border-right-0 search-box" type="search" placeholder="Keresés" name="search_text" id="pname">
+      <span class="input-group-append" id="pname-icon">
+      </span>
+      </div>
+  </div>
+  <br>
+  <button style="background-color: skyblue; width: 200px; margin: auto; display: block; font-weight: bold;" class="button-33 add-to-cart" role="button">Keresés</button>
+</form>
+
+
+{% for message in messages %}
+<div style="display: block;" class="popup" id="popup">
+    {% if message|striptags == 'A bejegyzés címe legfeljebb 50 karakter a tartalma pedig legfeljebb 1000 karakter lehet' %}
+    <img src="{% static 'images/x.png' %}" />
+    {% else %}
+    <img src="{% static 'images/tick.png' %}" />
+    {% endif %}
+    <div style="margin-top: 20px;" class="message {{ message.tags }}">{{message}}</div>
+    <br>
+        {% if message|striptags == 'A bejegyzés címe legfeljebb 50 karakter a tartalma pedig legfeljebb 1000 karakter lehet' %}
+        <button style="background: red;" id="popupClose">OK</button>
+        {% else %}
+        <button id="popupClose">OK</button>
+        {% endif %}
+</div>
+{% endfor %}
+
+{% if form %}
+<form id="post" method=POST>
+    {% csrf_token %}
+
+    <div class="wrapper">
+      <div class="card2">
+        <div class="user">
+          <div class="profile">
+            <div class="row">
+            <div class="col-md-12 col-lg-2">
+            {% if self_profile.imageURL %}
+              <img src="{{self_profile.imageURL}}" class="ava">
+            {% else %}
+              <img src="{% static 'images/placeholder_img.jpg' %}" class="ava">
+            {% endif %}
+            </div> 
+            <div style="margin-left: 10px;" class="username col-md-12 col-lg-7">
+              <h3 class="uname">{{self_profile.user}}</h3>
+              
+              <p style="margin: 0;" class="name">{{form.title}}</p>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="twitt">
+          <p style="margin: auto;">{{form.body}}</p>
+        </div>
+        <button class="button-33 post" name="create_post">Közlés</button>
+      </div>
+    </div>
+</form>
+{% endif %}
+
+
+{% for post in posts %}
+<div class="wrapper">
+    <div class="card2">
+      <div class="user">
+        <div class="profile">
+          <a href="{% url 'profile' post.profile.user.id %}">
+            {% if post.profile.imageURL %}
+                <img src="{{post.profile.imageURL}}" class="ava">
+            {% else %}
+                <img src="{% static 'images/placeholder_img.jpg' %}" class="ava">
+            {% endif %} 
+          </a>
+          <div class="username">
+            <a href="{% url 'profile' post.profile.user.id %}">
+                <h3 class="uname">{{post.profile.user}}</h3></a>
+            <p class="name">{{post.title}}</p>
+            <span>{{post.created|date:'Y.m.d - H:i'}}</span>
+          </div>
+        </div>        
+      </div>
+      <div class="twitt">
+        <p style="background-color: white; padding: 10px; border-radius: 5px;">{{post.body}}</p>
+      </div>
+      <div class="insight">
+        <div class="like">
+          <a href="{% url 'post_like' post.id %}">
+          <svg width="24" height="24" viewBox="0 0 24 24" {% if self_profile in post.likes.all %}fill="red"{% else %}fill="none"{% endif %} xmlns="http://www.w3.org/2000/svg">
+            <g id="heart">
+              <path id="Vector" d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.1283 5.64169 1.54871 7.04097 1.54871 8.5C1.54871 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22249 22.4518 8.5C22.4518 7.77751 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.351 5.12075 20.84 4.61V4.61Z" stroke="white" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+          </svg>
+          </a>
+          {% if post.likes.all.count == 1 %}
+          {% if post.likes.all.0.user == request.user %}
+          <p class="like-value"><strong>Kedveled</strong> a bejegyzést</p>
+          {% else %}
+          <p class="like-value"><a class="liker" href="{% url 'profile' post.likes.all.0.user.id %}">{{post.likes.all.0.user}}</a> kedveli a bejegyzést</p>
+          {% endif %} 
+          {% endif %}
+          {% if post.likes.all.count > 1 %}
+          {% if post.likes.all.0.user == request.user %}
+          <p class="like-value"><strong>Kedveled</strong> és rajtad kívül további <span data-target="{{post.id}}" id="showLikes" class="likes">{{post.number_of_likes}} személy </span>kedveli a bejegyzést</p>
+          {% else %} 
+          <p class="like-value"><a class="liker" href="{% url 'profile' post.likes.all.0.user.id %}">{{post.likes.all.0.user}}</a> és további <span data-target="{{post.id}}" id="showLikes" class="likes">{{post.number_of_likes}} személy</span> kedveli a bejegyzést</p>
+          {% endif %} 
+          {% endif %}
+          {% if post.likes.all.count == 0 %}
+          <p style="font-weight: 500;" class="like-value">Nem kedveli jelenleg senki sem a bejegyzést<p>
+          {% endif %}
+        </div>
+      </div>
+      <div style="display: flex;">
+      {% if post.id in comments_ids %}
+      <i class='bx bx-comment-detail comment_icon' id="showComment{{post.id}}" data-target="comment{{post.id}}" data-target2="closeComment{{post.id}}"></i>
+      <i class='bx bx-comment-x comment_icon hidden' id="closeComment{{post.id}}" data-target="comment{{post.id}}" data-target2="showComment{{post.id}}"></i>
+      {% endif %}
+
+      <form style="display: flex;" id="commentForm{{post.id}}" method=POST>
+      {% csrf_token %}
+      <p class="sendComment">{{form2.comment_body}}</p>
+      <input type="hidden" name="current_post" value="{{post.id}}">
+      <button type="submit" class='sendCommentBtn bx bx-send' data-target="commentForm{{post.id}}"></button>
+      </form>
+
+      </div>
+      <div id="comment{{post.id}}" class="hidden">
+        {% for comment in comments %}
+        {% if comment.post.id == post.id %}
+        <div class="comment">
+          <div class="comment_first_line">
+            {% if comment.sender.imageURL %}
+              <img src="{{comment.sender.imageURL}}" class="ava_comment">
+            {% else %}
+              <img src="{% static 'images/placeholder_img.jpg' %}" class="ava_comment">
+            {% endif %}
+            <p>{{comment.sender}}</p>
+
+            <form method="POST" id="deleteCommentForm">
+              {% csrf_token %}
+              <input type="hidden" name="comment_id" value="{{comment.id}}">
+              <button style="position: relative; left: 280px; font-size: larger; border: none;" class='bx bxs-x-circle' type="submit" name="delete_comment"></button>
+            </form>
+            
+          </div>
+          <p>{{comment.comment_body}}</p>
+        </div>
+        {% endif %} 
+        {% endfor %} 
+      </div>
+    </div>
+  </div>
+
+
+  <div style="display: block;" class="popup hidden" id="likes{{post.id}}">
+    <i id="closeLikes" data-target="{{post.id}}" style="font-size: 25px; float: right; margin-top: 20px; cursor: pointer;" class='bx bxs-x-circle'></i>
+    <div style="margin-top: 10px;">
+    <p ><strong>Összesen {{post.likes.all.count}} kedvelés van a bejegyzésen</strong></p><hr>
+    {% for liker in post.likes.all %}
+        <div style="margin: 10px;">
+        {% if liker.imageURL %}
+        <img src="{{liker.imageURL}}" style="width: 20px; height: 20px; margin: auto;">
+        {% else %}
+        <img src="{% static 'images/placeholder_img.jpg' %}" style="width: 20px; height: 20px; margin: auto;">
+        {% endif %}
+        <a class="liker" href="{% url 'profile' liker.user.id %}">{{liker.user}}</a>
+        </div>
+    {% endfor %} 
+    </div>
+</div>
+
+
+
+{% endfor %}
+
+{% if messages %}
+<script>
+    popup = document.getElementById('popup');
+
+    popup.style.display = 'block';
+
+    setTimeout(loginAnimation, 6000);
+
+    function loginAnimation() {
+        document.getElementById('popup').style.animation = "closePopupAnimation 0.5s ease-in-out";
+
+        setTimeout(function() {
+            document.getElementById('popup').style.animation = "";
+            document.getElementById('popup').style.display = "none";
+        }, 500);  
+    }
+
+    var popupClose = document.getElementById('popupClose')
+    popupClose.addEventListener("click", function () {
+        loginAnimation()
+      });
+
+</script>
+{% endif %}
+
+
+<script>
+  const commentButtons = document.querySelectorAll('.sendCommentBtn');
+
+  commentButtons.forEach(function(button) {
+      button.addEventListener('click', function(event) {
+          event.preventDefault();
+          const targetFormId = this.getAttribute('data-target');
+          const targetForm = document.getElementById(targetFormId);
+          targetForm.submit();
+      });
+  });
+</script>
+
+<script>
+window.onload = function() {
+    // Előző görgetési pozíció mentése
+    var previousScrollPosition = sessionStorage.getItem('scrollPosition');
+
+    // Ha volt előző pozíció, akkor oda görgetünk vissza
+    if (previousScrollPosition !== null) {
+        window.scrollTo(0, previousScrollPosition);
+    }
+
+    // Újratöltés esetén frissítjük a görgetési pozíciót
+    window.onbeforeunload = function() {
+        sessionStorage.setItem('scrollPosition', window.pageYOffset);
+    };
+};
+</script>
+
+<script>
+  const showLikesElements = document.querySelectorAll('#showLikes');
+  const closeLikesElements = document.querySelectorAll('#closeLikes');
+
+  showLikesElements.forEach(spanElement => {
+            spanElement.addEventListener('click', function() {
+                handleSpanClick(this);
+            });
+        });
+
+        function handleSpanClick(spanElement) {
+            // Az adott span elemhez tartozó data-target érték lekérdezése
+            const dataTargetValue = spanElement.getAttribute('data-target');
+
+            const divId = `likes${dataTargetValue}`;
+            const targetDiv = document.getElementById(divId)
+
+            targetDiv.classList.remove('hidden')
+            
+        }
+
+  closeLikesElements.forEach(spanElement => {
+            spanElement.addEventListener('click', function() {
+                handleCloseClick(this);
+            });
+        });
+
+        function handleCloseClick(spanElement) {
+            // Az adott span elemhez tartozó data-target érték lekérdezése
+            const dataTargetValue = spanElement.getAttribute('data-target');
+
+            const divId = `likes${dataTargetValue}`;
+            const targetDiv = document.getElementById(divId)
+
+            targetDiv.classList.add('hidden')   
+        }
+
+  var showCommentButtons = document.querySelectorAll('[id^="showComment"]');
+  var closeCommentButtons = document.querySelectorAll('[id^="closeComment"]');
+
+  showCommentButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var targetElement = this.getAttribute('data-target');
+      var targetElement2 = this.getAttribute('data-target2');
+      var targetElement3 = this.id
+      document.getElementById(targetElement).classList.remove('hidden');
+      document.getElementById(targetElement2).classList.remove('hidden');
+      document.getElementById(targetElement3).classList.add('hidden');
+    });
+});
+
+  closeCommentButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var targetElement = this.getAttribute('data-target');
+      var targetElement2 = this.getAttribute('data-target2');
+      var targetElement3 = this.id
+      document.getElementById(targetElement).classList.add('hidden');
+      document.getElementById(targetElement2).classList.remove('hidden');
+      document.getElementById(targetElement3).classList.add('hidden');
+    });
+});
+</script>
+
+{% endblock content %}
+
