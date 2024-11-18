@@ -1,3 +1,3 @@
 Webshop Projekt
 Szerzői jogvédelemmel ellátva
-teszt jellegű
+teszt jelleg hátha
