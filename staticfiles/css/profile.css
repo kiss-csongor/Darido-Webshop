@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --body-color: #00A9FF;
+  --sidebar-color: #CDF5FD;
+  --primary-color: #0079b5;
+  --primary-color-light: #00b6e3;
+  --toggle-color: #ddd;
+  --text-color: #707070;
+  --text-color-dark: #f6f5ff;
+  --grey: #545454;
+  --black: #000000;
+  --white: #fff;
+
+  --tran-02: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.4s ease;
+  --tran-05: all 0.5s ease;
+}
+
+body{
+    display: flex;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0; /
+}
+
+body.dark .profileData span{
+    color: black;
+}
+
+.card{
+    border:none;
+    box-shadow: var(--black) 0 0 1.6vh;
+    position:relative;
+    overflow:hidden;
+    border-radius:8px;
+    max-width: 1000px;
+}
+
+body.dark .card{
+    box-shadow: var(--white) 0 0 1.6vh;
+}
+
+.card:before{
+    
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background-color:#dde0ff;
+    transform:scaleY(1);
+    transition:all 0.5s;
+    transform-origin: bottom
+}
+
+.card:after{
+    
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background-color:#4879ff;
+    transform:scaleY(0);
+    transition:all 0.5s;
+    transform-origin: bottom
+}
+
+.card:hover::after{
+    transform:scaleY(1);
+}
+
+
+.fonts{
+    font-size:16px;
+}
+
+.social-list{
+    display:flex;
+    list-style:none;
+    justify-content:center;
+    padding:0;
+}
+
+.social-list li{
+    padding:10px;
+    color:#0b35a5;
+    font-size:19px;
+}
+
+
+.buttons button:nth-child(1){
+       color:#0b35a5;
+       height:40px;
+}
+
+.buttons button:nth-child(1):hover{
+       color:#fff;
+       height:40px;
+       background-color:#0b35a5;
+}
+
+.buttons button:nth-child(2){
+       background-color:#0b35a5;
+       color:#fff;
+        height:40px;
+}
+
+.block {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.span {
+    margin-left: 5px;
+    color: black;
+}
+
+.sor {
+    border-radius: 10px;
+    display: flex;
+    margin: 30px;
+    background: #77c6ff;
+    box-shadow: var(--black) 0 0 1.6vh;
+}
+.sor.post {
+    border-radius: 10px;
+    display: block;
+    margin: 30px;
+    background: #77c6ff;
+    box-shadow: var(--black) 0 0 1.6vh;
+}
+
+.div1, .div2 {
+    flex: 1;
+    padding: 20px;
+}
+
+.orderphoto{
+    margin: 5px;
+    max-width: 150px;
+    object-fit: cover;
+    border-radius: 15%;
+    box-shadow: grey 0 0 1vh;
+}
+
+.follower_img{
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+}
+
+.profile_img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.block.description{
+    margin: auto; 
+    max-width: 400px;
+    border-radius: 10px;
+    background: #77c6ff;
+    box-shadow: var(--black) 0 0 1.6vh;
+}
+
+a.follower_a{
+    text-decoration: none;
+    margin-right: 5px;
+}
+.follower_a:hover{
+    text-decoration: none;
+    scale: 1.1;
+    color: #4879ff;
+}
+
+.follow_btn:hover{
+    text-decoration: none;
+    scale: 1.3;
+    color: white;
+    background-color: green;
+}
+.unfollow_btn:hover{
+    text-decoration: none;
+    scale: 1.3;
+    color: white;
+    background-color: red;
+}
+
+button{
+    background-color: green;
+    border-radius: 50%;
+    background: none;
+}
+.likes{
+    font-weight: 600;
+}
+.likes:hover{
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.big_btn{
+    margin-left: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+}
+
+.updateProfileBtn{
+    cursor: pointer;
+}
+
+.edit {
+    visibility: hidden; /* Az "edit" osztályú p elem tartalmát láthatatlanná teszi, de a helyét megőrzi */
+    
+}
+
+.edit p{
+    visibility: visible; /* Az "edit" osztályú p elem tartalmát láthatatlanná teszi, de a helyét megőrzi */
+}
+
+.edit input{
+    visibility: visible; /* Az "image" input mezőt láthatóvá teszi */
+}
+
+.image_edit{
+    border: 1px solid grey;
+    margin: auto;
+    width: 400px;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+}

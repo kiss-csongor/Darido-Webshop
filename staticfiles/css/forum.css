@@ -1,0 +1,148 @@
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 1500px;
+  margin-top: 50px;
+}
+
+.card2 {
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  height: auto;
+  padding: 35px 31px;
+  gap: 15px;
+  border-radius: 10px;
+  background: #77c6ff;
+  box-shadow: var(--black) 0 0 1.6vh;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.ava {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.ava_comment {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.icon {
+  font-size: 30px;
+  color: black;
+}
+
+.username {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.username .uname {
+  line-height: normal;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.username .name {
+  color: black;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.twitt .tag {
+  text-decoration: none;
+  color: #1da1f2;
+}
+
+.insight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.like svg:hover {
+  fill: crimson;
+  filter: drop-shadow(0 0 10px crimson);
+  cursor: pointer;
+}
+
+.form-textarea{
+  resize: none;
+  border-radius: 7px;
+}
+
+.like-value{
+  font-weight: 400;
+}
+
+.comment_icon{
+  cursor: pointer;
+  font-size: 23px;
+  color: whitesmoke;
+}
+
+.comment{
+  background-color: white;
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.comment_first_line{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.sendComment{
+  margin-left: 35px;
+}
+
+.sendCommentBtn{
+  margin-top: -10px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 20px;
+}
