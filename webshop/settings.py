@@ -100,16 +100,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
 
-SATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # Security settings for HTTPS
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True  # A HTTP kéréseket automatikusan HTTPS-re irányítja
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Az Nginx-hez szükséges beállítás
+CSRF_COOKIE_SECURE = True  # Biztosítja, hogy a CSRF cookie csak HTTPS-en keresztül legyen elérhető
+SESSION_COOKIE_SECURE = True  # Biztosítja, hogy a session cookie is csak HTTPS-en keresztül legyen elérhető
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
