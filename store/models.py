@@ -82,7 +82,7 @@ class Product(models.Model):
     def qr_code(self):
         # Generálja a termék URL-jét
         product_url = reverse('product', kwargs={'pk': self.pk})  # Ez a termék URL-jét generálja
-        full_url = f"http://127.0.0.1:8000{product_url}"  # A link teljes URL-je, amit QR kódba szeretnénk
+        full_url = f"https://unistock.sytes.net{product_url}"  # A link teljes URL-je, amit QR kódba szeretnénk
 
         # QR kód generálása
         qr = qrcode.QRCode(
